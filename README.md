@@ -1,6 +1,6 @@
 # countingdotpy
 A script that makes the discord counting bot more fun <br>
-Made for [this](https://discord.bots.gg/bots/510016054391734273) bot
+Made for [this](https://discord.bots.gg/bots/510016054391734273) Discord bot
 
 ## Usage:
 Using default settings (randomized):
