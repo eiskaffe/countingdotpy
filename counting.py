@@ -88,8 +88,8 @@ def main() -> None:
         current = calculate(current, mod)
         
     difference = calculate(TARGET, current)
-    factors = [trial_division(int(n)) for n in I + [bin_to_str(difference)]]
-    factors.sort(key=lambda x: int(x))
+    I += [int(bin_to_str(difference))]
+    factors = [trial_division(int(n)) for n in sorted(I)]
     factors = [[splitter(f) for f in factor] for factor in factors if factor]
 
     printed = printing(factors)
