@@ -6,12 +6,15 @@ def convert(A: str, length: int = 0) -> str:
     t = str(bin(int(A)))[2:]
     return "0" * (length - len(t)) + t
 
+def XOR(a: int, b: int) -> bool:
+    return a + b - 2 * a * b
+    
 def calculate(A: str, B: str) -> str:
     # Analytical representation of the XOR gate:
     # f(a, b) = |a - b|
     returning = ""
     for a, b in zip(A, B, strict=True):
-        if abs(int(a) - int(b)): returning += "1"
+        if XOR(int(A), int(B)): returning += "1"
         else: returning += "0"
     return returning 
 
