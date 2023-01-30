@@ -13,7 +13,7 @@ When using the manual settings write the numbers you would like to appear in the
 ## Example usage
 ```
 Input the the next number! > 18
-Set the number of desired random numbers! (n <= 254) > 5
+Set the number of desired random numbers! (n <= 30) > 5
 
 (2*3)^((2*2*3)+1)^2*((2*3)+1)^3*((2*3)+1)^2*2*((2*3)+1)^2*3*((2*2)+1)
 ```
