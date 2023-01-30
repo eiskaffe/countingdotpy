@@ -11,9 +11,12 @@ Using default settings (randomized):
 When using the manual settings write the numbers you would like to appear in the output.
 
 ## Example usage
-`Input the the next number! > 18` <br>
-`Set the number of desired random numbers! (n <= 254) > 5` <br>
-Output: `(2*3)^((2*2*3)+1)^2*((2*3)+1)^3*((2*3)+1)^2*2*((2*3)+1)^2*3*((2*2)+1)`
+```
+Input the the next number! > 18
+Set the number of desired random numbers! (n <= 254) > 5
+
+(2*3)^((2*2*3)+1)^2*((2*3)+1)^3*((2*3)+1)^2*2*((2*3)+1)^2*3*((2*2)+1)
+```
 
 ## How is it working?
 The counting discord bot has an [XOR operation](https://stackoverflow.com/questions/14526584/what-does-the-xor-operator-do) labeled with this character: ^. <br>
