@@ -48,10 +48,9 @@ def trial_division(n: int) -> list[int]:
 
 def splitter(n: int):
     if n <= 3: return n
-    for i in range(n):
-        if not is_prime(n - i): break
-    factors = list(map(splitter, trial_division(n - i)))
-    return factors, i
+    k = 1 if is_prime(n) else 0
+    factors = list(map(splitter, trial_division(n - k)))
+    return factors, 1
 
 def printing(a: list) -> str:
     string = [printing_recurse(x) for x in a]
@@ -87,7 +86,7 @@ def main() -> None:
     else: I = random_integers(int(input(f"Set the number of desired random numbers! (n <= {max_value - 1}) > ")), max_value)
 
     current = "0"*l
-    for mod in map(lambda x: convert(x, l), I): 
+    for mod in map(lambda x: convert(x, l), I):
         current = calculate(current, mod)
         
     difference = calculate(TARGET, current)
@@ -96,7 +95,11 @@ def main() -> None:
     factors = [[splitter(f) for f in factor] for factor in factors if factor]
 
     printed = printing(factors)
-    print(printed)
+    if len(printed) > 300:
+        with open(f"{N}_{len(factors)}.txt", "a") as outf:
+            print(printed, file=outf)
+    else:
+        print(printed)
     # print(printed.replace("*", "\\*"))
             
     input("\nPress enter to exit...")
