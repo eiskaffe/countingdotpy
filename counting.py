@@ -1,29 +1,11 @@
 import random
-RANDOM_OR_MANUAL = 0 
-# 0 for random, 1 for manual
+RANDOM_MODE = False
+PRINT_TO_FILE = False
+DISCORD_NITRO = True
 
 def convert(A: str, length: int = 0) -> str:
     t = str(bin(int(A)))[2:]
     return "0" * (length - len(t)) + t
-
-def XOR(a: int, b: int) -> bool:
-    return a + b - 2 * a * b
-    
-def calculate(A: str, B: str) -> str:
-    # Analytical representation of the XOR gate:
-    # f(a, b) = |a - b|
-    returning = ""
-    for a, b in zip(A, B, strict=True):
-        if XOR(int(A), int(B)): returning += "1"
-        else: returning += "0"
-    return returning 
-
-def bin_to_str(A: str) -> str:
-    L = len(A)
-    c = 0
-    for i, a in enumerate(A):
-        if int(a): c += 2 ** (L - i - 1)
-    return c
 
 def is_prime(n: int) -> bool:
     if n <= 3: return n > 1
@@ -78,29 +60,27 @@ def random_integers(N: int, b: int) -> list[int]:
 
 def main() -> None:
     N = input("Input the the next number! > ")
-    TARGET = convert(N)
-    l = len(TARGET)
-    I = []
-    max_value = 2 ** l - 1
-    if RANDOM_OR_MANUAL: I = input(f"Give the desired numbers with spaces between! (n <= {max_value})! > ").split()
+    max_value = 2 ** len(convert(N)) - 1
+    if RANDOM_MODE: I = input(f"Give the desired numbers with spaces between! (n <= {max_value})! > ").split()
     else: I = random_integers(int(input(f"Set the number of desired random numbers! (n <= {max_value - 1}) > ")), max_value)
 
-    current = "0"*l
-    for mod in map(lambda x: convert(x, l), I):
-        current = calculate(current, mod)
-        
-    difference = calculate(TARGET, current)
-    I += [int(bin_to_str(difference))]
-    factors = [trial_division(int(n)) for n in sorted(I)]
+    base = 0
+    for mod in I:
+        base ^= mod
+    difference = base ^ int(N)
+
+    factors = [trial_division(n) for n in I + [difference]]
     factors = [[splitter(f) for f in factor] for factor in factors if factor]
 
     printed = printing(factors)
-    if len(printed) > 300:
+    if len(printed) > 2000:
+        print("Discord Nitro is required")
+    elif len(printed) > 300 and PRINT_TO_FILE:
         with open(f"{N}_{len(factors)}.txt", "a") as outf:
             print(printed, file=outf)
     else:
         print(printed)
-    # print(printed.replace("*", "\\*"))
+
             
     input("\nPress enter to exit...")
 
